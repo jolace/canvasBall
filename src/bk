@@ -1,0 +1,44 @@
+
+import { frameDelay, radius } from './config.js';
+import  App  from './app.js';
+import { calculatePhisc } from './calculation.js';
+
+var canvas;
+var ctx;
+
+
+function setup() {
+
+    canvas = document.getElementsByTagName("canvas");
+    var app = new App(canvas[0]);
+    setInterval(render(app),frameDelay);
+}
+let render = (app) => {
+    ctx = app.elem.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    console.log(app.balls);
+    for (let i = 0; i < app.balls.length; i++) {
+        let top = app.balls[i];
+        let newCordinates = calculatePhisc(top.position, top.velocity, canvas.width, canvas.height);
+        top.position.x = newCordinates.position.x;
+        top.position.y = newCordinates.position.y;
+        top.velocity.x = newCordinates.velocity.x;
+        top.velocity.y = newCordinates.velocity.y;
+        app.balls[i] = top;
+
+        ctx.save();
+        ctx.translate(top.position.x, top.position.y);
+        ctx.beginPath();
+        ctx.fillStyle = top.color;
+
+        ctx.arc(0, 0, radius, 0, Math.PI * 2, true);
+        ctx.fill();
+        ctx.closePath();
+        ctx.restore();
+    }
+
+}
+
+
+
+setup();
