@@ -1,0 +1,6 @@
+npm install --save-dev mocha
+npm install mocha-webpack --save-dev
+npm i mocha-webpack@next
+
+npm install --save-dev chai
+npm install babel-node
