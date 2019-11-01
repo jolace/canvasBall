@@ -1,4 +1,4 @@
-const expect = require('chai').expect;
+
 
 import {calculatePhisc} from '../src/calculation';
 
@@ -11,7 +11,7 @@ describe('Phisc calculation function', () => {
         let height = 500;
         let res = calculatePhisc(position, velocity, width, height);
         // Assert
-        expect(res).to.be.an('object');
+        expect(typeof res).toBe('object');
     });
 
     it('should return variable as object with position {x,y} and velocity {x,y} properties', () => {
@@ -21,13 +21,13 @@ describe('Phisc calculation function', () => {
         let height = 500;
         let res = calculatePhisc(position, velocity, width, height);
         // Assert
-        expect(res).to.be.an('object');
-        expect(res).to.have.property('position');
-        expect(res).to.have.property('velocity');
-        expect(res.position).to.have.property('x');
-        expect(res.position).to.have.property('y');
-        expect(res.velocity).to.have.property('x');
-        expect(res.velocity).to.have.property('y');
+        expect(typeof res).toBe('object');
+        expect(res).toHaveProperty('position');
+        expect(res).toHaveProperty('velocity');
+        expect(res.position).toHaveProperty('x');
+        expect(res.position).toHaveProperty('y');
+        expect(res.velocity).toHaveProperty('x');
+        expect(res.velocity).toHaveProperty('y');
 
     });
 
@@ -39,9 +39,9 @@ describe('Phisc calculation function', () => {
         let height = 500;
         let res = calculatePhisc(position, velocity, width, height);
         
-        expect(res.position).to.be.an.instanceof(Object);
-        expect(res.position.x).to.equals(22.183349549841495);
-        expect(res.position.y).to.equals(10.613125);
+        expect(typeof res.position).toBe('object');
+        expect(res.position.x).toBeCloseTo(22.183349549841495);
+        expect(res.position.y).toBeCloseTo(10.613125);
         
     });
 
@@ -53,8 +53,8 @@ describe('Phisc calculation function', () => {
         let height = 500;
         let res = calculatePhisc(position, velocity, width, height);
         
-        expect(res.position.x).not.to.equals(23.183349549841495);
-        expect(res.position.y).not.to.equals(20.613125176543344);
+        expect(res.position.x).not.toBeCloseTo(23.183349549841495);
+        expect(res.position.y).not.toBeCloseTo(20.613125176543344);
         
     });
 
@@ -66,9 +66,9 @@ describe('Phisc calculation function', () => {
         let height = 500;
         let res = calculatePhisc(position, velocity, width, height);
         
-        expect(res.position).to.be.an.instanceof(Object);
-        expect(res.position.x).to.equals(385);
-        expect(res.position.y).to.equals(109.22625);
+        expect(typeof res.position).toBe('object');
+        expect(res.position.x).toBeCloseTo(385);
+        expect(res.position.y).toBeCloseTo(109.22625);
     });
 
     it('ball should bound of left wall and go right', () => {
@@ -79,9 +79,9 @@ describe('Phisc calculation function', () => {
         let height = 500;
         let res = calculatePhisc(position, velocity, width, height);
         
-        expect(res.position).to.be.an.instanceof(Object);
-        expect(res.position.x).to.equals(15.036268183072846);
-        expect(res.position.y).to.equals(385.36073777693656);
+        expect(typeof  res.position).toBe('object');
+        expect(res.position.x).toBeCloseTo(15.036268183072846);
+        expect(res.position.y).toBeCloseTo(385.36073777693656);
     });
 
 
@@ -94,9 +94,9 @@ describe('Phisc calculation function', () => {
         let height = 500;
         let res = calculatePhisc(position, velocity, width, height);
         
-        expect(res.position).to.be.an.instanceof(Object);
-        expect(res.position.x).to.equals(348.4521993335791);
-        expect(res.position.y).to.equals(376.3304699445396);
+        expect(typeof  res.position).toBe('object');
+        expect(res.position.x).toBeCloseTo(348.4521993335791);
+        expect(res.position.y).toBeCloseTo(376.3304699445396);
     });
 
 

@@ -1,38 +1,46 @@
 
-import { frameDelay, radius } from './config.js';
+import * as config from './config.js';
 import { calculatePhisc } from './calculation.js';
-import App from './app.js';
+import Ball from './Ball.js';
 
-class View {
-    constructor(elem,eventType,environment) {
-        console.log(elem);
-        var app = new App(elem,eventType,environment);
-        setInterval(this.render, frameDelay, app);
+export default class View {
+    constructor(appContext) {
+        
+        this.appContext = appContext;
     }
-    render(app) {
-        let ctx = app.elem.getContext("2d");
-        ctx.strokeStyle = '#000000';
-        ctx.clearRect(0, 0, app.elem.width, app.elem.height);
-        for (let i = 0; i < app.balls.length; i++) {
-            let top = app.balls[i];
-            let newCordinates = calculatePhisc(top.position, top.velocity, app.elem.width, app.elem.height,app.environment);
+    render(){
+
+        let ctx = this.appContext.canvasContext;
+        ctx.clearRect(0, 0, config.canvasWidth, config.canvasHeight);
+        if(this.appContext.environment == 'water')
+        {
+            ctx.fillStyle = config.waterCanvasColor;
+            ctx.fillRect(0, 0, config.canvasWidth, config.canvasHeight);
+        }
+        for (let i = 0; i < this.appContext.balls.length; i++) {
+            let top = this.appContext.balls[i];
+            let newCordinates = calculatePhisc(top.position, top.velocity, config.canvasWidth, config.canvasHeight,this.appContext.environment);
             top.position.x = newCordinates.position.x;
             top.position.y = newCordinates.position.y;
             top.velocity.x = newCordinates.velocity.x;
             top.velocity.y = newCordinates.velocity.y;
-            app.balls[i] = top;
+            this.appContext.balls[i] = top;
             ctx.save();
             ctx.translate(top.position.x, top.position.y);
             ctx.beginPath();
             ctx.fillStyle = top.color;
-            ctx.arc(0, 0, radius, 0, Math.PI * 2, true);
+            ctx.arc(0, 0, config.radius, 0, Math.PI * 2, true);
             ctx.fill();
             ctx.closePath();
             ctx.restore();
         }
     }
+    addBall(mouse)  {
+        let color = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
+        this.appContext.balls.push(new Ball(mouse.x, mouse.y, color));
+    }
 }
 
 
 
-new View(document.getElementById("canvas"),'click','air');
+
