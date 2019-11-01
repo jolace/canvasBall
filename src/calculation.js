@@ -1,26 +1,30 @@
 
 import * as config from './config.js';
-
+/**
+ * Get the position object with (x,y) properties.
+ * @return {position} The position object with current (x,y) cordinates.
+ * @return {velocity} The velocity object with current (x,y) cordinates.
+ * @param {number} width - Width of area.
+ * @param {number} height - Height of area.
+ * @param {string} environment  - Environment variable help us to calculate the density parametar  ( denisty for air / denisty for water )
+ */
 export const calculatePhisc = (position, velocity, width, height, environment) => {
-    let Fx;
-    let Fy;
-    let ax;
-    let ay;
+
     let density = config.densityAir;
-    if(environment == 'water')
+    if (environment == 'water')
         density = config.densityWater;
     // Do physics
     // Drag force: Fd = -1/2 * Cd * A * rho * v * v
-    Fx = -0.5 * config.dragCoefficient * config.area * density * velocity.x * velocity.x * velocity.x / Math.abs(velocity.x);
-    Fy = -0.5 * config.dragCoefficient * config.area * density * velocity.y * velocity.y * velocity.y / Math.abs(velocity.y);
+    let Fx = -0.5 * config.dragCoefficient * config.area * density * velocity.x * velocity.x * velocity.x / Math.abs(velocity.x);
+    let Fy = -0.5 * config.dragCoefficient * config.area * density * velocity.y * velocity.y * velocity.y / Math.abs(velocity.y);
 
     Fx = (isNaN(Fx) ? 0 : Fx);
     Fy = (isNaN(Fy) ? 0 : Fy);
 
     // Calculate acceleration ( F = ma )
-    ax = Fx / config.mass;
-    ay = config.gravity + (Fy / config.mass);
-    
+    let ax = Fx / config.mass;
+    let ay = config.gravity + (Fy / config.mass);
+
     // Integrate to get velocity
     velocity.x += ax * config.frameRate;
     velocity.y += ay * config.frameRate;

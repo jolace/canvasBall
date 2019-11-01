@@ -2,11 +2,19 @@
 import * as config from './config.js';
 import { calculatePhisc } from './calculation.js';
 import Ball from './Ball.js';
-
+/** Class View render ball in area from ball position and velocity cordinates */
 export default class View {
+    /**
+     * Create a view instance and initializing appContext object.
+     * @param {object} appContext - The appContext object. Object has element context property, balls array property and environment property
+     */
     constructor(appContext) {
         this.appContext = appContext;
     }
+    /**
+     * Render function first clear content from area.
+     * Iterate balls array and for each ball call calculatePhisc function that calculate new position and velocity (x,y) cordinates and render ball in area with new cordinates
+     */
     render = () =>
     {
         let ctx = this.appContext.canvasContext;
@@ -34,6 +42,11 @@ export default class View {
             ctx.restore();
         }
     }
+    /**
+     * addBall function create new ball with mouse object cordinates and generate random color for each new ball. Ball is added to appContext.balls property,
+     * so next time when render is called new ball will be render in area
+     * @param {object} mouse - Object with (x,y) cordinates that we need for start position when we create object from Ball class
+     */
     addBall = (mouse) =>
     {
         let color = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
