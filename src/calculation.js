@@ -1,7 +1,7 @@
 
 import * as config from './config.js';
 
-export function calculatePhisc(position, velocity, width, height, environment) {
+export const calculatePhisc = (position, velocity, width, height, environment) => {
     let Fx;
     let Fy;
     let ax;

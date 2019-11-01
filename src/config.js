@@ -10,10 +10,12 @@ export const area = Math.PI * radius * radius / (10000); //  Area of ball m^2 -
 export const gravity = 9.81;  //  Gravity constant   m / s^2 
 export const mass = 0.1; //  Mass of ball in kg
 export const restitution = -0.7; // The coefficient of restitution is the ratio of the final to initial relative velocity between two objects after they collide.
+export const initXVelocity = 4; // init X velocity cordinate for new created ball
+export const initYVelocity = 0; // init Y velocity cordinate for new created ball
 
 // Constant for Canvas 
-export const canvasWidth = 500;
-export const canvasHeight = 400;
+export const canvasWidth = 500; //  Canvas width in HTML document
+export const canvasHeight = 400;//  Canvas height in HTML document
 export const waterCanvasColor = "#0097be"; //  color for water
 export const strokeStyle = '#000000'; //  color for canvas strokeStyle
 export const addBallEventType = 'click';   //  add type of mouse event for add new ball in canvas default click - other values ( mouseover,mouseout )

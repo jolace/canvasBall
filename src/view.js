@@ -5,11 +5,10 @@ import Ball from './Ball.js';
 
 export default class View {
     constructor(appContext) {
-        
         this.appContext = appContext;
     }
-    render(){
-
+    render = () =>
+    {
         let ctx = this.appContext.canvasContext;
         ctx.clearRect(0, 0, config.canvasWidth, config.canvasHeight);
         if(this.appContext.environment == 'water')
@@ -19,7 +18,7 @@ export default class View {
         }
         for (let i = 0; i < this.appContext.balls.length; i++) {
             let top = this.appContext.balls[i];
-            let newCordinates = calculatePhisc(top.position, top.velocity, config.canvasWidth, config.canvasHeight,this.appContext.environment);
+            let newCordinates = calculatePhisc(top.getPosition(), top.getVelocity(), config.canvasWidth, config.canvasHeight,this.appContext.environment);
             top.position.x = newCordinates.position.x;
             top.position.y = newCordinates.position.y;
             top.velocity.x = newCordinates.velocity.x;
@@ -35,7 +34,8 @@ export default class View {
             ctx.restore();
         }
     }
-    addBall(mouse)  {
+    addBall = (mouse) =>
+    {
         let color = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
         this.appContext.balls.push(new Ball(mouse.x, mouse.y, color));
     }
