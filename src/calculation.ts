@@ -1,6 +1,6 @@
-"use strict";
-exports.__esModule = true;
-var config = require("./config.js");
+
+import * as config from './config.js';
+import iCoridnates from './Icoridnates.js';
 /**
  * Get the position object with (x,y) properties.
  * @return {object} The position {iCoridnates} and velocity {iCoridnates}  object with current (x,y) cordinates.
@@ -8,25 +8,31 @@ var config = require("./config.js");
  * @param {number} height - Height of area.
  * @param {string} environment  - Environment variable help us to calculate the density parametar  ( denisty for air / denisty for water )
  */
-exports.calculatePhisc = function (position, velocity, width, height, environment) {
-    var density = config.densityAir;
+export const calculatePhisc = (position :iCoridnates , velocity : iCoridnates, width : number, height : number, environment : string) => {
+
+    let density = config.densityAir;
     if (environment == 'water')
         density = config.densityWater;
     // Do physics
     // Drag force: Fd = -1/2 * Cd * A * rho * v * v
-    var Fx = -0.5 * config.dragCoefficient * config.area * density * velocity.x * velocity.x * velocity.x / Math.abs(velocity.x);
-    var Fy = -0.5 * config.dragCoefficient * config.area * density * velocity.y * velocity.y * velocity.y / Math.abs(velocity.y);
+    let Fx = -0.5 * config.dragCoefficient * config.area * density * velocity.x * velocity.x * velocity.x / Math.abs(velocity.x);
+    let Fy = -0.5 * config.dragCoefficient * config.area * density * velocity.y * velocity.y * velocity.y / Math.abs(velocity.y);
+
     Fx = (isNaN(Fx) ? 0 : Fx);
     Fy = (isNaN(Fy) ? 0 : Fy);
+
     // Calculate acceleration ( F = ma )
-    var ax = Fx / config.mass;
-    var ay = config.gravity + (Fy / config.mass);
+    let ax = Fx / config.mass;
+    let ay = config.gravity + (Fy / config.mass);
+
     // Integrate to get velocity
     velocity.x += ax * config.frameRate;
     velocity.y += ay * config.frameRate;
+
     // Integrate to get position
     position.x += velocity.x * config.frameRate * 100;
     position.y += velocity.y * config.frameRate * 100;
+
     // Handle collisions
     if (position.y > height - config.radius) {
         velocity.y *= config.restitution;
@@ -40,5 +46,6 @@ exports.calculatePhisc = function (position, velocity, width, height, environmen
         velocity.x *= config.restitution;
         position.x = config.radius;
     }
-    return { position: position, velocity: velocity };
-};
+
+    return { position, velocity };
+}
