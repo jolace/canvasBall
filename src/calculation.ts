@@ -1,14 +1,14 @@
 
-import * as config from './config.js';
+import * as config from './config';
+import iCoridnates from './Icoridnates';
 /**
  * Get the position object with (x,y) properties.
- * @return {position} The position object with current (x,y) cordinates.
- * @return {velocity} The velocity object with current (x,y) cordinates.
+ * @return {object} The position {iCoridnates} and velocity {iCoridnates}  object with current (x,y) cordinates.
  * @param {number} width - Width of area.
  * @param {number} height - Height of area.
  * @param {string} environment  - Environment variable help us to calculate the density parametar  ( denisty for air / denisty for water )
  */
-export const calculatePhisc = (position, velocity, width, height, environment) => {
+export const calculatePhisc = (position :iCoridnates , velocity : iCoridnates, width : number, height : number, environment : string) => {
 
     let density = config.densityAir;
     if (environment == 'water')

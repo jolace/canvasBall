@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@modules": [
+                "src/*"
+            ]
+        },
+        "outDir": "./dist/",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "noImplicitAny": true,
+        "target": "es6",
+        "jsx": "react",
+        //"allowJs": true,
+        "module":"commonjs",
+        "allowSyntheticDefaultImports":true,
+        "esModuleInterop": true,
+        "lib": ["es2015", "es2016","dom","es5"]
+    }
+}
