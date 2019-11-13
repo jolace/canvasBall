@@ -1,6 +1,6 @@
 
-import * as config from './config.js';
-import iCoridnates from './Icoridnates.js';
+import * as config from './config';
+import iCoridnates from './Icoridnates';
 /**
  * Get the position object with (x,y) properties.
  * @return {object} The position {iCoridnates} and velocity {iCoridnates}  object with current (x,y) cordinates.
