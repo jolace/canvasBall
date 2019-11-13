@@ -83,8 +83,8 @@ Host `ballInCanvas.js` on your server and add in html document ```<script type="
 
 ## Live Demo
 
-[Bounce ball live demo] (https://jolace.github.io/canvasBall/)
+Bounce ball live demo (https://jolace.github.io/canvasBall/)
 
 ## Author
 
-[Aleksandar Jolakoski] (https://github.com/jolace)
+Aleksandar Jolakoski (https://github.com/jolace)
