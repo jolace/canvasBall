@@ -8,11 +8,10 @@ import iCoridnates from './Icoridnates';
  * @param {number} height - Height of area.
  * @param {string} environment  - Environment variable help us to calculate the density parametar  ( denisty for air / denisty for water )
  */
-export const calculatePhisc = (position :iCoridnates , velocity : iCoridnates, width : number, height : number, environment : string) => {
+export const calculatePhisc = (position: iCoridnates, velocity: iCoridnates, width: number, height: number, environment: string) => {
 
-    let density = config.densityAir;
-    if (environment == 'water')
-        density = config.densityWater;
+    let density = environment == 'water' ? config.densityWater : config.densityAir;
+
     // Do physics
     // Drag force: Fd = -1/2 * Cd * A * rho * v * v
     let Fx = -0.5 * config.dragCoefficient * config.area * density * velocity.x * velocity.x * velocity.x / Math.abs(velocity.x);
@@ -34,14 +33,18 @@ export const calculatePhisc = (position :iCoridnates , velocity : iCoridnates, w
     position.y += velocity.y * config.frameRate * 100;
 
     // Handle collisions
+    // bottom
     if (position.y > height - config.radius) {
         velocity.y *= config.restitution;
+        velocity.x *= Math.abs(config.restitution);
         position.y = height - config.radius;
     }
+    // right wall
     if (position.x > width - config.radius) {
         velocity.x *= config.restitution;
         position.x = width - config.radius;
     }
+    // left wall
     if (position.x < config.radius) {
         velocity.x *= config.restitution;
         position.x = config.radius;

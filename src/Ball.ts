@@ -5,8 +5,8 @@ import iCoridnates from './Icoridnates';
 export default class Ball {
 
     position: iCoridnates;
-    velocity: iCoridnates = { x: config.initXVelocity, y: config.initYVelocity };
-    
+    velocity: iCoridnates = { x: this.getRandom(), y: this.getRandom() };
+
     /**
      * Create a ball instance and initializing position, velocity and color variables.
      * @param {number} startX - The x cordinate in area for this ball.
@@ -15,5 +15,10 @@ export default class Ball {
      */
     constructor(startX: number, startY: number, public color: string) {
         this.position = { x: startX, y: startY };
+    }
+
+    // Gets a random number given on configuration values for initial velocity.
+    getRandom() {
+        return Math.random() * (config.maxInitVelocity - config.minInitVelocity) + config.minInitVelocity;
     }
 }

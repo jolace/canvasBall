@@ -26,10 +26,13 @@ export default class View {
         }
         for (let i = 0; i < this.appContext.balls.length; i++) {
             let top = this.appContext.balls[i];
+            
+            // calculate new coordinates
             let newCordinates = calculatePhisc(top.position, top.velocity, config.canvasWidth, config.canvasHeight, this.appContext.environment);
             top.position = newCordinates.position;
             top.velocity = newCordinates.velocity;
-            this.appContext.balls[i] = top;
+            
+            // draw
             ctx.save();
             ctx.translate(top.position.x, top.position.y);
             ctx.beginPath();

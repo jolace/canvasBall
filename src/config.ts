@@ -10,8 +10,8 @@ export const area = Math.PI * radius * radius / (10000); //  Area of ball m^2 -
 export const gravity = 9.81;  //  Gravity constant   m / s^2 
 export const mass = 0.1; //  Mass of ball in kg
 export const restitution = -0.7; // The coefficient of restitution is the ratio of the final to initial relative velocity between two objects after they collide.
-export const initXVelocity = 4; // init X velocity cordinate for new created ball
-export const initYVelocity = 0; // init Y velocity cordinate for new created ball
+export const minInitVelocity = 10; // min initial velocity used in random function for newly created ball
+export const maxInitVelocity = -7; // max initial velocity used in random function for newly created ball
 
 // Constant for Canvas 
 export const canvasWidth = 500; //  Canvas width in HTML document

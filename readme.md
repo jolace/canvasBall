@@ -5,15 +5,13 @@ Bouncing balls is a simple javascirpit application where users can click on canv
 
 Balls in water, because of water density, can not bounce as in air enviorment. Balls in air, because of its lower density, can bounce more time depending of gravity and position in canvas.
 
+I intentionally left out the top wall, because in my opinion without a top wall solution looks better.
+
 ## Runing the application
 
 ### Prerequirments
 
 - To have Node.js installed on your machine
-```
-$ npm install -g npx
-```
-The npx command executes npm package binaries. Executes <command> either from a local node_modules/.bin or from a central cache, installing any packages needed in order for <command> to run.
 
 ### Install
 ```
@@ -27,11 +25,11 @@ This command will install all dependencies for our application
  
 ## Bulding the application
 ```
-$ npx webpack
+$ npm run webpack
 ```
 This command will build our TypeScript files in javascript files and create bundle file `ballInCanvas.js`. This bundle file will be created in `dist` folder.
-In `index.html` we just use this newly created script ```<script type="module" src="dist/ballInCanvas.js"></script> ```.
-So for deploy we just need the script `dist/ballInCanvas.js`.
+Also, it will copy the `index.html` into `dist` folder .
+So for deploy we just need the content of the `dist` folder.
 
 ## Local development
 
@@ -42,7 +40,7 @@ This will create development server and will run the application with parametars
 
 ## Tests
 ```
-$ npm test
+$ npm run test
 ```
 
 This command will run tests and will report if all tests passed or someone will fail with error message.
@@ -79,7 +77,7 @@ There are unit tests for:
 
 ## Deployment
 
-Host `ballInCanvas.js` on your server and add this in your html document ```<script type="module" src="ballInCanvas.js"></script> ```.
+First run `npm run webpack` and then deploy the content from the `dist` folder.
 
 ## Live Demo
 

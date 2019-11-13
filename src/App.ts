@@ -1,13 +1,14 @@
 import * as config from './config';
-import View from './view';
+import View from './View';
 import IappContext from './IappContext';
+
 /** Class App is application entry point. In this class we get HTML elements from document, add event listeners and call render function ( from View class ) on some defined period*/
 class App {
 
-    elem: HTMLCanvasElement;
-    envElem: HTMLSelectElement;
-    appContext: IappContext;
-    view: View;
+    elem: HTMLCanvasElement; // hold the canvas element
+    envElem: HTMLSelectElement; // hold the environment dropdown element
+    appContext: IappContext; // application context used in the view
+    view: View; // reference to the view
     
     /**
     * Get HTML elements from document, add event listeners and pass to View class constructoor

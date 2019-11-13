@@ -1,15 +1,25 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  devtool: 'inline-source-map',
-  entry: './src/app.ts',
+  entry: ['./src/App.ts'],
+  output: {
+    filename: 'ballInCanvas.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
   devServer: {
-    contentBase: './',
+    contentBase: './dist'
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './src/index.html'
+    })
+  ],
   module: {
     rules: [
       {
@@ -21,16 +31,11 @@ module.exports = {
           }
         ]
       },
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
-        enforce: "pre",
-        test: /\.js$/,
-        loader: "source-map-loader"
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader']
       }
     ]
-  },
-  output: {
-    filename: 'ballInCanvas.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+  }
 };
